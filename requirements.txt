@@ -1,0 +1,14 @@
+backports-abc==0.5
+backstage==0.1.0
+certifi==2016.9.26
+gunicorn==19.6.0
+jwt==0.3.2
+lxml==3.7.1
+pycrypto==2.6.1
+pyzmq==16.0.2
+redis==2.10.5
+requests==2.12.4
+singledispatch==3.4.0.3
+six==1.10.0
+SQLAlchemy==1.1.4
+tornado==4.4.2
