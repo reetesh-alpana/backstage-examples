@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apis>
+  <api name="contentcheck" context="^content/$">
+    <resource method="POST">
+      <inSequence>
+	<log category="info" value="Testing Content Switch"/>
+	<switch from_header="content_type">
+	  <case value="application/json">
+	    <log category="info" value="This is a JSON payload " expression="body"/>
+	    <property action='set' expression="$context.return_payload" params="JSON Match"/>
+	  </case>
+	  <case value="application/xml">
+		<log category="info" value="This is an XML payload " expression="body"/>
+		<property action='set' expression="$context.return_payload" params="XML Match"/>
+	  </case>
+	  <default>
+	    <log category="info" value="This content type is not supported : " expression="content_type"/>
+	    <property action='set' expression="$context.return_payload" params="XML Match"/>
+	  </default>
+	</switch>
+	<processresponse/> 
+     </inSequence>
+     <outSequence>
+       <log category="info" value="Preparing response for content switch example" />
+       <response use_payload="return_payload" status_code="200" status_message="Ok">
+	 <header name="content-type" value="text/plain"/>
+       </response> 
+     </outSequence>
+    </resource>
+  </api>
+</apis>
